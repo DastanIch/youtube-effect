@@ -55,7 +55,7 @@
                 <div class="video_wrapper">
                     <div class="video_wrapper_back">
                         <img src="/static/img/regular_figure.svg" alt="" class="absolut play_button">
-                        <iframe class="hidden" width="100%" height="581" src="https://www.youtube.com/embed/pfxQf9NBMFM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe id="main_video" class="hidden" width="100%" height="581" src="https://www.youtube.com/embed/QZ5gCzDhb9A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -96,18 +96,26 @@
                     <h2>Спикеры</h2>
                     <div class="spickers">
                         <div class="spicker_item">
-                            <img src="/static/img/konstantin.svg" alt="">
+                            <img src="/static/img/konstantin.png" alt="">
                             <h4>КОНСТАНТИН<br>
                                 СОБОЛЬ</h4>
-                            <p>Режиссер, креативный директор
-                                SEED by FCB, Алматы/Киев
+                            <p>Режиссер, креативный<br> директор
+                                SEED by FCB,<br> Алматы/Киев
                             </p>
                         </div>
                         <div class="spicker_item">
-                            <img src="/static/img/andrey.svg" alt="">
+                            <img src="/static/img/anton.png" alt="">
+                            <h4>Антон<br>
+                                Стороженко</h4>
+                            <p>Руководитель авианаправления<br>
+                                Chocotravel и Aviata<br>
+                                Алматы</p>
+                        </div>
+                        <div class="spicker_item">
+                            <img src="/static/img/andrey.png" alt="">
                             <h4>АНДРЕЙ<br>
                                 МИРОНЮК</h4>
-                            <p>Генеральный директор SEED by FCB,
+                            <p>Генеральный директор<br> SEED by FCB,<br>
                                 Алматы/Киев</p>
                         </div>
                     </div>
@@ -151,14 +159,15 @@
                         </div>
                     </div>
                     <div class="form_block">
-                        <form action="" method="post">
+                        <form id="sign_up" action="" method="post">
+                            <input type="hidden" name="sended_post" value="<?=rand()?>">
                             <p class="form_head">Уважаемые партнеры!</p>
                             <p class="form_head">Для участия в семинаре просим заполнить вас небольшую регистрационную форму.</p>
                             <p class="required">* Обязательно</p>
                             <div class="form_group_container">
                                 <div class="form_group">
                                     <label for="input_mail">Адрес электронной почты<span class="required">*</span></label>
-                                    <input type="text" required name="mail" id="input_mail" placeholder="Ваш адрес эл.почты">
+                                    <input type="text" required name="email" id="input_mail" placeholder="Ваш адрес эл.почты">
                                 </div>
                                 <div class="form_group">
                                     <label for="input_name">Имя и Фамилия<span class="required">*</span></label>
@@ -181,6 +190,15 @@
                             <button type="submit">Отправить</button>
                             <span class="just_hint">Никогда не используйте Google для передачи паролей.</span>
                         </form>
+                        <div id="mail_not_valid" class="ajax_return">
+                            Поля неверно заполнены
+                        </div>
+                        <div id="mail-success" class="success ajax_return">
+                            Спасибо, мы свяжемся с вами как можно скорее.
+                        </div>
+                        <div id="mail-fail" class="error ajax_return">
+                            Извините, возникла ошибка, попробуйте снова.
+                        </div>
                     </div>
                 </div>
                 <img src="/static/img/regular_figure.svg" alt="" class="absolut section1_figure">

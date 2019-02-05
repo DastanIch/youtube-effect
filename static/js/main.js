@@ -5,6 +5,7 @@ $(document).ready(function () {
     $('.play_button').click(function () {
         $(this).parent('.video_wrapper_back').addClass('play');
         $(this).parent('.video_wrapper_back').find('iframe').removeClass('hidden');
+        $("#main_video").attr('src', $("#main_video").attr('src') + '?autoplay=1');
     });
     $('.slide_to').click(function (e) {
         e.preventDefault();
@@ -43,7 +44,50 @@ $(document).ready(function () {
         $(this).closest('.modall-push').slideUp().remove();
     });
     $('#input_numbers').mask("+7(999) 999-99-99");
+    // spickersFix();
+    // $(window).on('resize', function () {
+    //     spickersFix();
+    // });
+    $('#sign_up_form').on('submit', function(e){
+        e.preventDefault();
+        $data = $(this).serialize();
+        $.ajax({
+            url: 'https://ye/sign_up.php',
+            type: 'post',
+            dataType: 'json',
+            data: $data,
+            success: function (data) {
+                console.log(data);
+                if(data.message == 'success'){
+                    $('#mail-success').fadeIn();
+                    $('.form_block input[type="text"], .form_block input[type="email"]').val('');
+                    $('.form_block textarea').html('').val('');
+                }else{
+                    $('#mail_not_valid').fadeIn();
+                }
+                setTimeout(function(){
+                    $('#mail-success, #mail_not_valid').fadeOut();
+                    $('#sign_up').removeClass('active');
+                    $('body').trigger('open_popup');
+                },5000);
+            },
+            error: function () {
+                $('#mail-fail').fadeIn();
+                setTimeout(function(){
+                    $('#mail-fail').fadeOut();
+                },5000);
+            }
+        });
+    });
 });
+function spickersFix(){
+    var heights = $(".spicker_item > img").map(function ()
+    {
+        return $(this).height();
+    }).get();
+    maxHeight = Math.max.apply(null, heights);
+    $('.spicker_item > img').css('height', maxHeight);
+}
 var center;
 var activeRoute;
 function handlePermission() {
